@@ -19,8 +19,8 @@ set /p p=<%d%\prompt.txt
 if %p%==Cancel (goto ext)
 echo.
 echo ---              Downloading ClientSettings              ---
-if %p%==Yes (bitsadmin /transfer Theme /download /priority high /dynamic https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/FPS-FFlags.json %D%\%c% >nul)
-if %p%==No (bitsadmin /transfer Theme /download /priority high /dynamic https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/FPSAndQuality-FFlags.json %D%\%c% >nul)
+if %p%==Yes (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/FPS-FFlags.json -OutFile %D%\%c%")
+if %p%==No (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/FPSAndQuality-FFlags.json -OutFile %D%\%c%")
 echo.
 echo ---           Searching If Roblox Is Installed           ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
