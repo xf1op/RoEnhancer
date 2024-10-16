@@ -103,5 +103,5 @@ echo.
 echo ---                      Exiting...                      ---
 cd %temp%
 rd "%d%" /s /q 2>nul >nul
-timeout 1 >nul
+timeout 2 >nul
 exit
