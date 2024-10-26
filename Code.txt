@@ -20,7 +20,7 @@ echo.
 echo ---              Downloading ClientSettings              ---
 if %p%==Yes (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/MAXFPS.json -OutFile %D%\%c%")
 if %p%==No (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Quality.json -OutFile %D%\%c%")
-id %p%==Cancel (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Neutral.json -OutFile %D%\%c%")
+if %p%==Cancel (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Neutral.json -OutFile %D%\%c%")
 echo.
 echo ---           Searching If Roblox Is Installed           ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
