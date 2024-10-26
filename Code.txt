@@ -14,13 +14,13 @@ echo.
 echo ---               Closing Roblox Client...               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Do you want to use the most performant settings for Roblox?	It will result in lowered graphics in game!   (Cancel to exit)', 'RoEnhancer - Quality Of Life Roblox Script', '3', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Select which settings you want to use for Roblox?	Yes = Maximum performance | No = Quality | Cancel = Neutral changes', 'RoEnhancer - Quality Of Life Roblox Script', '3', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
 set /p p=<%d%\prompt.txt
-if %p%==Cancel (goto ext)
 echo.
 echo ---              Downloading ClientSettings              ---
-if %p%==Yes (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/FPS-FFlags.json -OutFile %D%\%c%")
-if %p%==No (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/FPSAndQuality-FFlags.json -OutFile %D%\%c%")
+if %p%==Yes (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/MAXFPS.json -OutFile %D%\%c%")
+if %p%==No (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Quality.json -OutFile %D%\%c%")
+id %p%==Cancel (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Neutral.json -OutFile %D%\%c%")
 echo.
 echo ---           Searching If Roblox Is Installed           ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
