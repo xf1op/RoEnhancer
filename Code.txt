@@ -14,7 +14,7 @@ echo.
 echo ---               Closing Roblox Client...               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Select which settings you want to use for Roblox?               Yes = Performance | No = Quality | Cancel = Neutral', 'RoEnhancer - Quality Of Life Roblox Script', '3', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Select which settings you want to use for Roblox?            	   Yes = Performance | No = Quality | Cancel = Neutral', 'RoEnhancer - Quality Of Life Roblox Script', '3', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
 set /p p=<%d%\prompt.txt
 echo.
 echo ---              Downloading ClientSettings              ---
