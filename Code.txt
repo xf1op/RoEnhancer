@@ -6,7 +6,7 @@ if not exist "%localappdata%\Roblox\theme.zip" (goto td)
 for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Days -ge 1"') do set "ct=%%v"
 if %ct%==False (goto ts)
 :td
-echo Downloading latest theme zip..
+echo - Downloading latest theme zip..
 bitsadmin /transfer Theme /download /dynamic https://github.com/xf1op/roblox-menu/archive/refs/heads/main.zip %localappdata%\Roblox\theme.zip >nul
 :ts
 echo - Success
