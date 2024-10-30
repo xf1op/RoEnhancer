@@ -1,9 +1,9 @@
 set tfd=%localappdata%\Roblox
 echo Getting latest Roblox version from internet..
-for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
+for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v" >nul
 echo - latest version: %v%
 echo Checking theme..
-for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Days -ge 1"') do set "ct=%%v"
+for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Days -ge 1"') do set "ct=%%v" >nul
 if %ct%==False (goto ts)
 echo Downloading latest theme zip..
 bitsadmin /transfer Theme /download /dynamic https://github.com/xf1op/roblox-menu/archive/refs/heads/main.zip %tfd%\theme.zip >nul
