@@ -5,7 +5,7 @@ echo - latest version: %v%
 echo Checking theme..
 for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Days -ge 1"') do set "ct=%%v"
 if %ct%==False (goto ts)
-echo Downloading theme..
+echo Downloading latest theme zip..
 bitsadmin /transfer Theme /download /dynamic https://github.com/xf1op/roblox-menu/archive/refs/heads/main.zip %tfd%\theme.zip >nul
 :ts
 echo - Success
