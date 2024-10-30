@@ -1,8 +1,14 @@
+set tfd=%localappdata%\Roblox
 echo Getting latest Roblox version from internet..
 for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
 echo - latest version: %v%
+echo Checking theme..
+for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Days -ge 1"') do set "ct=%%v"
+echo %ct%
+if %ct%==False (goto ts)
 echo Downloading theme..
-bitsadmin /transfer Theme /download /dynamic https://github.com/xf1op/roblox-menu/archive/refs/heads/main.zip %temp%\RoEnhancer\theme.zip >nul
+bitsadmin /transfer Theme /download /dynamic https://github.com/xf1op/roblox-menu/archive/refs/heads/main.zip %tfd%\theme.zip >nul
+:ts
 echo - Success
 cls
 echo.
@@ -31,7 +37,7 @@ goto NF
 echo.
 echo ---           Applying New Settings To Roblox!           ---
 rd ClientSettings /s /q
-xcopy /s %d%\theme.zip /y >nul
+xcopy /s %tfd%\theme.zip /y >nul
 tar -xf theme.zip
 xcopy /s roblox-menu-main /y >nul
 if '%errorlevel%'=='1' (goto AR)
@@ -69,7 +75,7 @@ rd Modifications /s /q >nul
 erase state.json /f 2>nul >nul
 echo { "ShowFFlagEditorWarning": false, "PlayerVersionGuid": "%v%" } >state.json
 md Modifications\ClientSettings >nul
-xcopy /s %d%\theme.zip /y >nul
+xcopy /s %tfd%\theme.zip /y >nul
 tar -xf theme.zip >nul
 xcopy /s roblox-menu-main modifications >nul
 rd roblox-menu-main /s /q >nul
