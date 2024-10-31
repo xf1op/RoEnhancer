@@ -3,7 +3,7 @@ for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://
 echo - latest version: %v%
 echo Checking theme..
 if not exist "%localappdata%\Roblox\theme.zip" (goto td)
-for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Days -ge 1"') do set "ct=%%v"
+for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Hours -ge 12"') do set "ct=%%v"
 if %ct%==False (goto ts)
 :td
 echo - Downloading latest theme zip..
