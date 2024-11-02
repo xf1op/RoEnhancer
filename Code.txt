@@ -1,41 +1,42 @@
-echo Getting latest Roblox version from internet..
+color 03
+echo Getting [32mlatest[36m Roblox version from internet..
 for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
-echo - latest version: %v%
-echo Checking theme..
+echo - [34mlatest version: [43m[97m%v%[36m[40m
+echo [33mChecking[36m theme..
 if not exist "%localappdata%\Roblox\theme.zip" (goto td)
-for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Hours -ge 12"') do set "ct=%%v"
+for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Days -ge 1"') do set "ct=%%v"
 if %ct%==False (goto ts)
 :td
-echo - Downloading latest theme zip..
+echo - [32mDownloading[36m latest theme zip..
 bitsadmin /transfer Theme /download /dynamic https://github.com/xf1op/roblox-menu/archive/refs/heads/main.zip %localappdata%\Roblox\theme.zip >nul
 :ts
-echo - Success
+echo - [32mSuccess[36m
 cls
 echo.
-echo ---      RoEnhancer - Quality Of Life Roblox Script      ---
+echo ---      [4m[31mRo[97mEnhancer[24m[40m[36m - [33mQuality Of Life[36m Roblox Script      ---
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Would You like to enhance your Roblox experience?		Script will close Roblox and ask you to open it again!', 'RoEnhancer - Quality Of Life Roblox Script', '4', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
 set /p p=<%d%\prompt.txt
 if %p%==No (goto ext)
 echo.
-echo ---               Closing Roblox Client...               ---
+echo ---               [31mClosing Roblox Client...[36m               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Select which settings you want to use for Roblox? 	           	   Yes = Performance | No = Quality | Cancel = Neutral', 'RoEnhancer - Quality Of Life Roblox Script', '3', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
 set /p p=<%d%\prompt.txt
 echo.
-echo ---              Downloading ClientSettings              ---
+echo ---              [32mDownloading [36mClientSettings              ---
 if %p%==Yes (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/MAXFPS.json -OutFile %D%\%c%")
 if %p%==No (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Quality.json -OutFile %D%\%c%")
 if %p%==Cancel (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Neutral.json -OutFile %D%\%c%")
 echo.
-echo ---           Searching If Roblox Is Installed           ---
+echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
 if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && goto rb
 if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && goto rb
 goto NF
 :rb
 echo.
-echo ---           Applying New Settings To Roblox!           ---
+echo ---           [33mApplying[36m New Settings To [41mRoblox[36m!           ---
 rd ClientSettings /s /q
 xcopy /s %localappdata%\Roblox\theme.zip /y >nul
 tar -xf theme.zip
@@ -48,8 +49,8 @@ cd ClientSettings
 copy %d%\%C% /y >nul
 if '%errorlevel%'=='1' (goto AR)
 echo.
-echo ---      Copying New Settings To Roblox Successful!      ---
-echo. & timeout 2 /nobreak >nul
+echo ---      [32mCopying[36m New Settings To [41mRoblox[36m Successful!      ---
+echo.
 goto cm
 :AR
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Roblox is installed in "Program Files" folder!		Please run script as administrator to continue!', 'RoEnhancer - Quality Of Life Roblox Script', '5', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %D%\Prompt.txt
@@ -70,7 +71,7 @@ powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Win
 goto ext
 :bs
 echo.
-echo ---          Applying New Settings To Bloxstrap          ---
+echo ---          [33mApplying[36m New Settings To [95mBloxstrap[36m          ---
 rd Modifications /s /q >nul
 erase state.json /f 2>nul >nul
 echo { "ShowFFlagEditorWarning": false, "PlayerVersionGuid": "%v%" } >state.json
@@ -83,29 +84,28 @@ erase theme.zip /f 2>nul >nul
 cd Modifications\ClientSettings
 copy %d%\%C% /y >nul
 echo.
-echo ---     Copying New Settings To Bloxtrap Successful!     ---
-echo. & timeout 2 /nobreak >nul
+echo ---     [32mCopying[36m New Settings To [95mBloxtrap[36m Successful!     ---
+echo.
 goto cm
 :cm
-echo ---                Cleaning Roblox Logs..                ---
+echo ---                [34mCleaning [36mRoblox Logs..                ---
 rd "%localappdata%\Roblox\logs" /s /q 2>nul >nul
 rd "%localappdata%\Bloxstrap\Logs" /s /q 2>nul >nul
 echo.
-echo ---           Thank You For Using This Script!           ---
-timeout 1 /nobreak >nul
+echo ---           [32mThank You[36m For Using This Script!           ---
 :opr
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Do you want to open Roblox client?', 'RoEnhancer - Quality Of Life Roblox Script', '4', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %D%\Prompt.txt
 set /p p=<%d%\Prompt.txt
 if %p%==No (goto ext)
 echo.
-echo ---               Opening Roblox Client..                ---
+echo ---               [34mOpening [31mRoblox[36m Client..                ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap.exe -player && goto ext
 if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto ext
 if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto ext
 goto NF
 :ext
 echo.
-echo ---                      Exiting...                      ---
+echo ---                      [31mExiting...[36m                      ---
 cd %temp%
 rd "%d%" /s /q 2>nul >nul
 timeout 2 >nul
