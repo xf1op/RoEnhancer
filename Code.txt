@@ -74,7 +74,7 @@ echo.
 echo ---          [33mApplying[36m New Settings To [95mBloxstrap[36m          ---
 rd Modifications /s /q >nul
 erase state.json /f 2>nul >nul
-echo {"ShowFFlagEditorWarning": false, "Player": {"VersionGuid": "%v%"}, "ModManifest": ["content\\fonts\\CustomFont.ttf", "content\\fonts\\families\\BuilderSans.json", "content\\fonts\\families\\JosefinSans.json", "content\\fonts\\families\\SourceSansPro.json"]} >state.json
+echo {"ShowFFlagEditorWarning": false, "Player": {"VersionGuid": "%v%"}} >state.json
 md Modifications\ClientSettings >nul
 xcopy /s %localappdata%\Roblox\theme.zip /y >nul
 tar -xf theme.zip >nul
