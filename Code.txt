@@ -13,7 +13,7 @@ for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LO
 if %ct%==False (goto ts)
 
 :td
-echo - [32mDownloading[36m %theme theme zip..
+echo - [32mDownloading[36m %theme% theme zip..
 bitsadmin /transfer Theme /download /dynamic https://raw.githubusercontent.com/xf1op/roblox-menu/refs/heads/main/%theme%.zip %localappdata%\Roblox\theme.zip >nul
 
 :ts
