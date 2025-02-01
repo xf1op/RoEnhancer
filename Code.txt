@@ -4,44 +4,34 @@ echo Getting [32mlatest[36m Roblox version from internet..
 for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
 echo - [34mlatest version: [43m[97m%v%[36m[40m
 echo [33mChecking[36m theme..
-
-powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.ControlBox = $false; $form.StartPosition = 'CenterScreen'; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Pick Your Theme'; $form.Width = 275; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Sunset'; $button1.Width = 75; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(10, 10); $button1.Add_Click({ $global:result = 'Sunset'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Bloxstrap'; $button2.Width = 75; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(90, 10); $button2.Add_Click({ $global:result = 'Bloxstrap'; $form.Close() }); $button3 = New-Object System.Windows.Forms.Button; $button3.Text = 'Devil''s Fade'; $button3.Width = 75; $button3.Height = 30; $button3.Location = New-Object System.Drawing.Point(170, 10); $button3.Add_Click({ $global:result = 'Devils_Fade'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Controls.Add($button3); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\theme.txt
-set /p theme=<%d%\theme.txt
-
+powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Pick Your Theme'; $form.Width = 275; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Sunset'; $button1.Width = 75; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(10, 10); $button1.Add_Click({ $global:result = 'Sunset'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Bloxstrap'; $button2.Width = 75; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(90, 10); $button2.Add_Click({ $global:result = 'Bloxstrap'; $form.Close() }); $button3 = New-Object System.Windows.Forms.Button; $button3.Text = 'Devil''s Fade'; $button3.Width = 75; $button3.Height = 30; $button3.Location = New-Object System.Drawing.Point(170, 10); $button3.Add_Click({ $global:result = 'Devils_Fade'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Controls.Add($button3); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\theme.txt && set /p theme=<%d%\theme.txt
 if not exist "%localappdata%\Roblox\theme.zip" (goto td)
 for /f "tokens=*" %%v in ('powershell -Command "((Get-Date) - (Get-Item "$env:LOCALAPPDATA\Roblox\theme.zip").CreationTime).Hours -ge 1"') do set "ct=%%v"
 if %ct%==False (goto ts)
-
 :td
 echo - [32mDownloading[36m %theme% theme zip..
 bitsadmin /transfer Theme /download /dynamic https://raw.githubusercontent.com/xf1op/roblox-menu/refs/heads/main/%theme%.zip %localappdata%\Roblox\theme.zip >nul
-
 :ts
 echo - [32mSuccess[36m
 cls
 echo.
 echo ---      [4m[31mRo[97mEnhancer[24m[40m[36m - [33mQuality Of Life[36m Roblox Script      ---
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Would You like to enhance your Roblox experience?		Script will close Roblox and ask you to open it again!', 'RoEnhancer - Quality Of Life Roblox Script', '4', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
-set /p p=<%d%\prompt.txt
+powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Do You Want To Continue?'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Yes'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'Yes'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'No'; $button2.Width = 50; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(110, 10); $button2.Add_Click({ $global:result = 'No'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
 if %p%==No (goto ext)
 echo.
 echo ---               [31mClosing Roblox Client...[36m               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Select which settings you want to use for Roblox? Preferences: YES => Performance | NO => Quality | CANCEL => Neutral', 'RoEnhancer - Quality Of Life Roblox Script', '3', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %d%\Prompt.txt
-set /p p=<%d%\prompt.txt
+powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Choose Your Graphics Preference'; $form.Width = 275; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Performance'; $button1.Width = 77; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(10, 10); $button1.Add_Click({ $global:result = 'MAXFPS'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Quality'; $button2.Width = 77; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(90, 10); $button2.Add_Click({ $global:result = 'Quality'; $form.Close() }); $button3 = New-Object System.Windows.Forms.Button; $button3.Text = 'Neutral'; $button3.Width = 77; $button3.Height = 30; $button3.Location = New-Object System.Drawing.Point(170, 10); $button3.Add_Click({ $global:result = 'Neutral'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Controls.Add($button3); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
 echo.
 echo ---              [32mDownloading [36mClientSettings              ---
-if %p%==Yes (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/MAXFPS.json -OutFile %D%\%c%")
-if %p%==No (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Quality.json -OutFile %D%\%c%")
-if %p%==Cancel (powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/Neutral.json -OutFile %D%\%c%")
+powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/ClientAppSettingsRBLX/main/%p%.json -OutFile %D%\%c%"
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
 if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && goto rb
 if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && goto rb
 goto NF
-
 :rb
 echo.
 echo ---           [33mApplying[36m New Settings To [41mRoblox[36m!           ---
@@ -60,7 +50,6 @@ echo.
 echo ---      [32mCopying[36m New Settings To [41mRoblox[36m Successful!      ---
 echo.
 goto cm
-
 :AR
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Roblox is installed in "Program Files" folder!		Please run script as administrator to continue!', 'RoEnhancer - Quality Of Life Roblox Script', '5', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %D%\Prompt.txt
 set /p p=<%D%\Prompt.txt
@@ -75,11 +64,9 @@ if %errorLevel% == 0 (
         exit /b
     )
 )
-
 :NF
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Outdated Roblox version has been found!       Please reopen Roblox client and download the update!', 'RoEnhancer - Quality Of Life Roblox Script', '0', [System.Windows.Forms.MessageBoxIcon]::Error);}" >nul
 goto ext
-
 :bs
 echo.
 echo ---          [33mApplying[36m New Settings To [95mBloxstrap[36m          ---
@@ -98,17 +85,14 @@ echo.
 echo ---     [32mCopying[36m New Settings To [95mBloxtrap[36m Successful!     ---
 echo.
 goto cm
-
 :cm
 echo ---                [34mCleaning [36mRoblox Logs..                ---
 rd "%localappdata%\Roblox\logs" /s /q 2>nul >nul
 rd "%localappdata%\Bloxstrap\Logs" /s /q 2>nul >nul
 echo.
 echo ---           [32mThank You[36m For Using This Script!           ---
-
 :opr
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Do you want to open Roblox client?', 'RoEnhancer - Quality Of Life Roblox Script', '4', [System.Windows.Forms.MessageBoxIcon]::Question);}" > %D%\Prompt.txt
-set /p p=<%d%\Prompt.txt
+powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Do You Want To Open Roblox?'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Yes'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'Yes'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'No'; $button2.Width = 50; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(110, 10); $button2.Add_Click({ $global:result = 'No'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
 if %p%==No (goto ext)
 echo.
 echo ---               [34mOpening [31mRoblox[36m Client..                ---
@@ -116,7 +100,6 @@ if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap
 if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto ext
 if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto ext
 goto NF
-
 :ext
 echo.
 echo ---                      [31mExiting...[36m                      ---
