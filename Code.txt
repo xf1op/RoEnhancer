@@ -36,7 +36,7 @@ goto NF
 echo.
 echo ---           [33mApplying[36m New Settings To [41mRoblox[36m!           ---
 rd ClientSettings /s /q
-xcopy /s %localappdata%\Roblox\theme.zip /y >nul
+xcopy %localappdata%\Roblox\theme.zip /y >nul
 tar -xf theme.zip
 xcopy /s %theme% /y >nul
 if '%errorlevel%'=='1' (goto AR)
