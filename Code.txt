@@ -25,13 +25,13 @@ if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\v
 goto NF
 :rb
 echo.
-echo ---           [33mApplying[36m New Settings To [41mRoblox![36m           ---
+echo ---           [33mApplying[36m New Settings To [31mRoblox![36m           ---
 md ClientSettings 2>nul >nul
 cd ClientSettings
 copy %d%\%C% /y >nul
 if '%errorlevel%'=='1' (goto AR)
 echo.
-echo ---      [32mCopying[36m New Settings To [41mRoblox[36m Successful!      ---
+echo ---      [32mCopying[36m New Settings To [31mRoblox[36m Successful!      ---
 echo.
 goto cm
 :AR
