@@ -13,10 +13,9 @@ echo.
 echo ---               [31mClosing Roblox Client...[36m               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
-powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Choose Your Graphics Preference'; $form.Width = 275; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Performance'; $button1.Width = 77; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(10, 10); $button1.Add_Click({ $global:result = 'F'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Quality'; $button2.Width = 77; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(90, 10); $button2.Add_Click({ $global:result = 'Q'; $form.Close() }); $button3 = New-Object System.Windows.Forms.Button; $button3.Text = 'Neutral'; $button3.Width = 77; $button3.Height = 30; $button3.Location = New-Object System.Drawing.Point(170, 10); $button3.Add_Click({ $global:result = 'N'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Controls.Add($button3); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
 echo.
 echo ---              [32mDownloading [36mClientSettings              ---
-powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/%p%.json -OutFile %D%\%c%"
+powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
