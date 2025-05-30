@@ -16,6 +16,7 @@ taskkill /f /im bloxstrap.exe 2>nul >nul
 echo.
 echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
+powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
@@ -27,7 +28,9 @@ echo.
 echo ---           [33mApplying[36m New Settings To [31mRoblox![36m           ---
 md ClientSettings 2>nul >nul
 cd ClientSettings
-copy %d%\%C% /y >nul
+copy %D%\%C% /y >nul
+if '%errorlevel%'=='1' (goto AR)
+cd.. && tar -xf %D%\XC.zip
 if '%errorlevel%'=='1' (goto AR)
 echo.
 echo ---      [32mCopying[36m New Settings To [31mRoblox[36m Successful!      ---
@@ -55,7 +58,8 @@ echo.
 echo ---          [33mApplying[36m New Settings To [95mBloxstrap[36m          ---
 md Modifications\ClientSettings 2>nul >nul
 cd Modifications\ClientSettings
-copy %d%\%C% /y >nul
+copy %D%\%C% /y >nul
+cd.. && tar -xf %D%\XC.zip
 echo.
 echo ---     [32mCopying[36m New Settings To [95mBloxtrap[36m Successful!     ---
 echo.
