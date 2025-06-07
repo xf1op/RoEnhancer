@@ -1,5 +1,5 @@
 # RoEnhancer - QoL batch script
-RoEnhancer - Script for Roblox client to replace "ClientAppSettings" json and theme inside of the app.
+RoEnhancer - Script for Roblox client to replace "ClientAppSettings" in roblox app and enhance user experience.
 
 ▶️ [Latest Release!!!](https://github.com/xf1op/RoEnhancer/releases/latest/) ◀️
 ## How does it work?
