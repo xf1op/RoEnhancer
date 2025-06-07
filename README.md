@@ -3,12 +3,9 @@ RoEnhancer - Script for Roblox client to replace "ClientAppSettings" json and th
 
 ▶️ [Latest Release!!!](https://github.com/xf1op/RoEnhancer/releases/latest/) ◀️
 ## How does it work?
-- The script downloads user's chosen theme, after that it gets applied and within it custom "clientappsettings.json" file is moved into **Roblox client** or **Bloxstrap\modifications** folder which changes *client settings* inside roblox application.
+- The script downloads custom "clientappsettings.json" file which is moved into **Roblox client** or **Bloxstrap\Modifications** folder that changes various settings inside roblox application.
 ## What does client settings json do?
-- Client settings json customizes user's game by ex. forcing light technology to increase game performance, lowering object and texture quality to utilize graphics card usage by few percents. I am able to make changes in json files BUT **i will never apply someone's exploitable fflags because i do not tolerate exploiters that make games not playable**.
-## Why adding theme?
-- For looks. In my opinion it just looks greater than default theme.
+- Client settings file customizes user experience by ex. forcing light technology to increase game performance, lowering object and texture quality to utilize graphics card usage. I am trying to maintain this file, make it the most performant and add more stuff BUT **i will never apply exploitable fflags because i do not tolerate exploiters**.
 
 # Sources of my FFlags and Theme:
 - https://github.com/xf1op/CAS
-- https://github.com/xf1op/roblox-menu
