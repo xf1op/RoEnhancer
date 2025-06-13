@@ -24,7 +24,7 @@ echo.
 echo ---               [31mClosing Roblox Client...[36m               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
-if %ur%==rem goto remset
+if %ur%==rem goto removesettings
 echo.
 echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
@@ -67,6 +67,7 @@ rd "%localappdata%\Bloxstrap\Logs" /s /q 2>nul >nul
 echo.
 echo ---           [32mThank You[36m For Using This Script!           ---
 echo.
+timeout 3 >nul
 echo ---               [34mOpening [31mRoblox[36m Client..                ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap.exe -player && goto ext
 if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto ext
@@ -90,7 +91,7 @@ if %errorLevel% == 0 (
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Outdated Roblox version has been found!       Please reopen Roblox client and download the update!', 'RoEnhancer - Quality Of Life Roblox Script', '0', [System.Windows.Forms.MessageBoxIcon]::Error);}" >nul
 goto ext
 
-:remset
+:removesettings
 echo.
 echo ---               [35mRemoving [36mClientSettings!               ---
 echo.
@@ -103,8 +104,10 @@ goto NF
 echo.
 echo ---           [35mRemoving[36m Settings From [31mBloxstrap[36m           ---
 echo.
-rd Modifications\ClientSettings /s /q 2>nul >nul
+cd Modifications\clientsettingscdn
+echo {} >ClientAppSettings.json
 goto cm
+
 :rrb
 echo.
 echo ---            [35mRemoving[36m Settings From [31mRoblox![36m            ---
