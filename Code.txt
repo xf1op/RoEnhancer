@@ -103,8 +103,7 @@ goto NF
 echo.
 echo ---           [35mRemoving[36m Settings From [31mBloxstrap[36m           ---
 echo.
-cd Modifications\ClientSettings
-echo {} >ClientAppSettings.json
+rd Modifications\ClientSettings /s /q 2>nul >nul
 goto cm
 :rrb
 echo.
