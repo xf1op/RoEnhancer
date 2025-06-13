@@ -8,6 +8,7 @@ cls
 echo.
 echo ---      [4m[31mRo[97mEnhancer[24m[40m[36m - [33mQuality Of Life[36m Roblox Script      ---
 if exist %localappdata%\Bloxstrap\Modifications\ClientSettings\ClientAppSettings.json (call :updrem) else if exist %localappdata%\roblox\versions\%v%\ClientSettings\ClientAppSettings.json (call :updrem) else if exist %ProgramFiles(x86)%\roblox\versions\%v%\ClientSettings\ClientAppSettings.json (call :updrem) else goto NF
+:remprmpt
 if %ur%==upd (goto updateset)
 if %ur%==rem (goto updateset)
 powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Do You want to continue?'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Yes'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'Yes'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'No'; $button2.Width = 50; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(110, 10); $button2.Add_Click({ $global:result = 'No'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
@@ -116,6 +117,4 @@ exit
 
 :updrem
 powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Would you like to update or remove the settings?'; $form.Width = 300; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Update'; $button1.Width = 60; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(50, 10); $button1.Add_Click({ $global:result = 'upd'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Remove'; $button2.Width = 60; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(170, 10); $button2.Add_Click({ $global:result = 'rem'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\updrem.txt && set /p ur=<%d%\updrem.txt
-goto fex
-
-:fex
+goto remprmpt
