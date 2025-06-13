@@ -17,7 +17,6 @@ echo.
 echo ---               [31mClosing Roblox Client...[36m               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
-if %ur%==rem goto removesettings
 echo.
 echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
@@ -86,6 +85,14 @@ if %errorLevel% == 0 (
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Outdated Roblox version has been found!       Please reopen Roblox client and download the update!', 'RoEnhancer - Quality Of Life Roblox Script', '0', [System.Windows.Forms.MessageBoxIcon]::Error);}" >nul
 goto exitapp
 
+:exitapp
+echo.
+echo ---                      [31mExiting...[36m                      ---
+cd %temp%
+rd %d% /s /q 2>nul >nul
+timeout 2 >nul
+exit
+
 :updrem
 powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Would you like to update or remove the settings?'; $form.Width = 300; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Update'; $button1.Width = 60; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(50, 10); $button1.Add_Click({ $global:result = 'upd'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Remove'; $button2.Width = 60; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(170, 10); $button2.Add_Click({ $global:result = 'rem'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\updrem.txt && set /p ur=<%d%\updrem.txt
 if %ur%==upd goto updset
@@ -115,11 +122,3 @@ echo ---            [35mRemoving[36m Settings From [31mRoblox![36m          
 echo.
 rd ClientSettings /s /q 2>nul >nul
 goto cm
-
-:exitapp
-echo.
-echo ---                      [31mExiting...[36m                      ---
-cd %temp%
-rd %d% /s /q 2>nul >nul
-timeout 2 >nul
-exit
