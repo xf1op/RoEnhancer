@@ -62,9 +62,9 @@ echo ---           [32mThank You[36m For Using This Script!           ---
 echo.
 timeout 2 >nul
 echo ---               [34mOpening [31mRoblox[36m Client..                ---
-if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap.exe -player && goto exitapp
-if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto exitapp
-if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto exitapp
+if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap.exe -player & goto exitapp
+if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe & goto exitapp
+if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && start RobloxPlayerBeta.exe & goto exitapp
 goto NF
 
 :AR
@@ -120,6 +120,6 @@ goto cm
 echo.
 echo ---                      [31mExiting...[36m                      ---
 cd %temp%
-rd "%d%" /s /q 2>nul >nul
+rd %d% /s /q 2>nul >nul
 timeout 2 >nul
 exit
