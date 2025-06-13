@@ -7,13 +7,16 @@ timeout 1 >nul
 cls
 echo.
 echo ---      [4m[31mRo[97mEnhancer[24m[40m[36m - [33mQuality Of Life[36m Roblox Script      ---
-powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Do You Want To Continue?'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Yes'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'Yes'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'No'; $button2.Width = 50; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(110, 10); $button2.Add_Click({ $global:result = 'No'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
+if exist %localappdata%\Bloxstrap\Modifications\ClientSettings\ClientAppSettings.json (call :updrem) else if exist %localappdata%\roblox\versions\%v%\ClientSettings\ClientAppSettings.json (call :updrem) else if exist %ProgramFiles(x86)%\roblox\versions\%v%\ClientSettings\ClientAppSettings.json (call :updrem) else goto NF
+powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Do You want to continue?'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Yes'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'Yes'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'No'; $button2.Width = 50; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(110, 10); $button2.Add_Click({ $global:result = 'No'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
 if %p%==No (goto ext)
+:updateset
 echo.
 echo ---               [31mClosing Roblox Client...[36m               ---
 taskkill /f /im RobloxPlayerBeta.exe 2>nul >nul
 taskkill /f /im bloxstrap.exe 2>nul >nul
 echo.
+if %ur%==rem (goto remset)
 echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
@@ -36,23 +39,6 @@ echo.
 echo ---      [32mCopying[36m New Settings To [31mRoblox[36m Successful!      ---
 echo.
 goto cm
-:AR
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Roblox is installed in "Program Files" folder!		Please run script as administrator to continue!', 'RoEnhancer - Quality Of Life Roblox Script', '5', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %D%\Prompt.txt
-set /p p=<%D%\Prompt.txt
-if %p%==Cancel (goto ext)
-net session >nul 2>&1
-if %errorLevel% == 0 (
-    echo Admin granted
-) else (
-    if not "%1"=="runAsAdmin" (
-        echo Relaunching script with administrative privileges...
-        powershell -Command "Start-Process '%~0' -ArgumentList 'runAsAdmin' -Verb RunAs"
-        exit /b
-    )
-)
-:NF
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Outdated Roblox version has been found!       Please reopen Roblox client and download the update!', 'RoEnhancer - Quality Of Life Roblox Script', '0', [System.Windows.Forms.MessageBoxIcon]::Error);}" >nul
-goto ext
 :bs
 echo.
 echo ---          [33mApplying[36m New Settings To [95mBloxstrap[36m          ---
@@ -70,15 +56,54 @@ rd "%localappdata%\Roblox\logs" /s /q 2>nul >nul
 rd "%localappdata%\Bloxstrap\Logs" /s /q 2>nul >nul
 echo.
 echo ---           [32mThank You[36m For Using This Script!           ---
-:opr
-powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Do You Want To Open Roblox?'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Yes'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'Yes'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'No'; $button2.Width = 50; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(110, 10); $button2.Add_Click({ $global:result = 'No'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
-if %p%==No (goto ext)
 echo.
 echo ---               [34mOpening [31mRoblox[36m Client..                ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap.exe -player && goto ext
 if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto ext
 if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && start RobloxPlayerBeta.exe && goto ext
 goto NF
+:AR
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Roblox is installed in "Program Files" folder!		Please run script as administrator to continue!', 'RoEnhancer - Quality Of Life Roblox Script', '5', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %D%\Prompt.txt
+set /p p=<%D%\Prompt.txt
+if %p%==Cancel (goto ext)
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    echo Admin granted
+) else (
+    if not "%1"=="runAsAdmin" (
+        echo Relaunching script with administrative privileges...
+        powershell -Command "Start-Process '%~0' -ArgumentList 'runAsAdmin' -Verb RunAs"
+        exit /b
+    )
+)
+:NF
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Outdated Roblox version has been found!       Please reopen Roblox client and download the update!', 'RoEnhancer - Quality Of Life Roblox Script', '0', [System.Windows.Forms.MessageBoxIcon]::Error);}" >nul
+goto ext
+
+:remset
+echo ---               [35mRemoving [36mClientSettings!               ---
+echo.
+echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
+if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto rbs
+if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && goto rrb
+if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && goto rrb
+goto NF
+
+:rbs
+echo.
+echo ---           [35mRemoving[36m Settings From [31mBloxstrap[36m           ---
+echo.
+cd Modifications\ClientSettings
+echo {}>ClientAppSettings.json
+goto cm
+
+:rrb
+echo.
+echo ---            [35mRemoving[36m Settings From [31mRoblox![36m            ---
+echo.
+rd ClientSettings /s /q 2>nul >nul
+goto cm
+
 :ext
 echo.
 echo ---                      [31mExiting...[36m                      ---
@@ -86,3 +111,12 @@ cd %temp%
 rd "%d%" /s /q 2>nul >nul
 timeout 2 >nul
 exit
+
+:updrem
+powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Would you like to update or remove the settings?'; $form.Width = 300; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Update'; $button1.Width = 60; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(50, 10); $button1.Add_Click({ $global:result = 'upd'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Remove'; $button2.Width = 60; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(170, 10); $button2.Add_Click({ $global:result = 'rem'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\updrem.txt && set /p ur=<%d%\updrem.txt
+if %ur%==upd (goto updateset)
+:: it will go to same thing but also activate different thing
+if %ur%==rem (goto updateset)
+goto fex
+
+:fex
