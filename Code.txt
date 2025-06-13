@@ -70,9 +70,7 @@ rd "%localappdata%\Roblox\logs" /s /q 2>nul >nul
 rd "%localappdata%\Bloxstrap\Logs" /s /q 2>nul >nul
 echo.
 echo ---           [32mThank You[36m For Using This Script!           ---
-:opr
-powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Do You Want To Open Roblox?'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'Yes'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'Yes'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'No'; $button2.Width = 50; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(110, 10); $button2.Add_Click({ $global:result = 'No'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %d%\Prompt.txt && set /p p=<%d%\prompt.txt
-if %p%==No (goto ext)
+timeout 2 >nul
 echo.
 echo ---               [34mOpening [31mRoblox[36m Client..                ---
 if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap.exe -player && goto ext
