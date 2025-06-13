@@ -23,9 +23,9 @@ powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
-if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto bs
-if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && goto rb
-if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && goto rb
+if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && goto bs
+if exist %localappdata%\roblox\versions\%v% cd /d %localappdata%\roblox\versions\%v% && goto rb
+if exist %ProgramFiles(x86)%\roblox\versions\%v% cd /d %ProgramFiles(x86)%\roblox\versions\%v% && goto rb
 goto NF
 :rb
 echo.
@@ -61,9 +61,9 @@ echo ---           [32mThank You[36m For Using This Script!           ---
 echo.
 timeout 2 >nul
 echo ---               [34mOpening [31mRoblox[36m Client..                ---
-if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && start bloxstrap.exe -player & goto exitapp
-if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe & goto exitapp
-if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && start RobloxPlayerBeta.exe & goto exitapp
+if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && start bloxstrap.exe -player & goto exitapp
+if exist %localappdata%\roblox\versions\%v% cd /d %localappdata%\roblox\versions\%v% && start RobloxPlayerBeta.exe & goto exitapp
+if exist %ProgramFiles(x86)%\roblox\versions\%v% cd /d %ProgramFiles(x86)%\roblox\versions\%v% && start RobloxPlayerBeta.exe & goto exitapp
 goto NF
 
 :AR
@@ -103,16 +103,16 @@ echo.
 echo ---               [35mRemoving [36mClientSettings!               ---
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
-if exist %localappdata%\bloxstrap cd %localappdata%\bloxstrap && goto rmvbs
-if exist %localappdata%\roblox\versions\%v% cd %localappdata%\roblox\versions\%v% && goto rmvrb
-if exist %ProgramFiles(x86)%\roblox\versions\%v% cd %ProgramFiles(x86)%\roblox\versions\%v% && goto rmvrb
+if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && goto rmvbs
+if exist %localappdata%\roblox\versions\%v% cd /d %localappdata%\roblox\versions\%v% && goto rmvrb
+if exist %ProgramFiles(x86)%\roblox\versions\%v% cd /d %ProgramFiles(x86)%\roblox\versions\%v% && goto rmvrb
 goto NF
 
 :rmvbs
 echo.
 echo ---           [35mRemoving[36m Settings From [31mBloxstrap[36m           ---
 echo.
-cd Modifications\clientsettingscdn
+cd Modifications\clientsettings
 echo {} >ClientAppSettings.json
 goto cm
 
