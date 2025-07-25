@@ -1,6 +1,6 @@
 color 03
 set /a NUM=%NUMBER_OF_PROCESSORS%-1
-echo %NUM% >%D%\nr.txt
+echo %NUM%>%D%\nr.txt
 set /p NUM=<%D%\nr.txt
 cls
 echo Getting [32mlatest[36m Roblox version from internet..
