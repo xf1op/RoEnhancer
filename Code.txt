@@ -21,6 +21,7 @@ echo.
 echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
+powershell -Command "(Get-Content %D%\%c%) -replace 'PROCESSORSCOUNT','%NUM%' | Set-Content %D%\%c%"
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && goto bs
