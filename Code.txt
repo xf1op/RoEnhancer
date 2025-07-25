@@ -1,4 +1,5 @@
 color 03
+set /a NUM=%NUMBER_OF_PROCESSORS%-1
 cls
 echo Getting [32mlatest[36m Roblox version from internet..
 for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
