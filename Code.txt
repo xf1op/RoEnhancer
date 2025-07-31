@@ -1,10 +1,10 @@
 color 03
-set /a NUM=%NUMBER_OF_PROCESSORS%-1
-echo %NUM%>%D%\nr.txt
+set /a NUM=%NUMBER_OF_PROCESSORS%-1>%D%\nr.txt
 set /p NUM=<%D%\nr.txt
-set /a NUM2=%NUMBER_OF_PROCESSORS%/2
-echo %NUM2%>%D%\nr2.txt
+set /a NUM2=%NUMBER_OF_PROCESSORS%/2>%D%\nr2.txt
 set /p NUM2=<%D%\nr2.txt
+powershell -Command "(Get-CimInstance -Namespace root\cimv2 -ClassName Win32_VideoController).MaxRefreshRate">%D%\displayHZ.txt
+set /p DispHZ=<%D%\displayHZ.txt
 cls
 echo Getting [32mlatest[36m Roblox version from internet..
 for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
@@ -27,8 +27,7 @@ echo.
 echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
-powershell -Command "(Get-Content %D%\%c%) -replace 'PCOUNT2','%NUM2%' | Set-Content %D%\%c%"
-powershell -Command "(Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%"
+powershell -Command "(Get-Content %D%\%c%) -replace 'PCOUNT2','%NUM2%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && goto bs
