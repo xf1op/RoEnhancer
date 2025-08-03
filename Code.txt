@@ -1,7 +1,7 @@
 color 03
 set /a NUM=%NUMBER_OF_PROCESSORS%-1>%D%\nr.txt
 set /p NUM=<%D%\nr.txt
-set /a NUM2=%NUMBER_OF_PROCESSORS%/2>%D%\nr2.txt
+set /a NUM2=%NUMBER_OF_PROCESSORS%/4>%D%\nr2.txt
 set /p NUM2=<%D%\nr2.txt
 powershell -Command "(Get-CimInstance -Namespace root\cimv2 -ClassName Win32_VideoController).MaxRefreshRate">%D%\displayHZ.txt
 set /p DispHZ=<%D%\displayHZ.txt
