@@ -29,7 +29,7 @@ echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
 powershell -Command "(Get-Content %D%\%c%) -replace 'PCOUNT2','%NUM2%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
-if %RES%==720p (powershell -Command "(Get-Content %D%\%c%) -replace 'YouGotEmPixels?','922' | Set-Content %D%\%c%")
+if %RES%==720p (powershell -Command "(Get-Content %D%\%c%) -replace 'YouGotEmPixels','922' | Set-Content %D%\%c%")
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && goto bs
