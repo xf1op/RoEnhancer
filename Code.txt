@@ -1,8 +1,6 @@
 color 03
 set /a NUM=%NUMBER_OF_PROCESSORS%-1>%D%\nr.txt
 set /p NUM=<%D%\nr.txt
-set /a NUM2=%NUMBER_OF_PROCESSORS%/4>%D%\nr2.txt
-set /p NUM2=<%D%\nr2.txt
 powershell -Command "(Get-CimInstance -Namespace root\cimv2 -ClassName Win32_VideoController).MaxRefreshRate">%D%\displayHZ.txt
 set /p DispHZ=<%D%\displayHZ.txt
 cls
@@ -30,7 +28,7 @@ echo ---              [32mDownloading [36mClientSettings              ---
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
 powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
 if %FPS%==1000 (set DispHZ=%FPS%)
-powershell -Command "(Get-Content %D%\%c%) -replace 'PCOUNT2','%NUM2%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
+powershell -Command "(Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
 if %RES%==720p (powershell -Command "(Get-Content %D%\%c%) -replace 'YouGotEmPixels','922' | Set-Content %D%\%c%")
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
