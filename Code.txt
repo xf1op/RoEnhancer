@@ -1,11 +1,13 @@
 color 03
 set /a NUM=%NUMBER_OF_PROCESSORS%-1>%D%\nr.txt
 set /p NUM=<%D%\nr.txt
-powershell -Command "(Get-CimInstance -Namespace root\cimv2 -ClassName Win32_VideoController).MaxRefreshRate">%D%\displayHZ.txt
+powershell -NoProfile -Command "(Get-WmiObject -Class Win32_Processor | Select-Object NumberOfCores).NumberOfCores">%D%\cpucores.txt
+set /p NUM2=<%D%\cpucores.txt
+powershell -NoProfile -Command "(Get-CimInstance -Namespace root\cimv2 -ClassName Win32_VideoController).MaxRefreshRate">%D%\displayHZ.txt
 set /p DispHZ=<%D%\displayHZ.txt
 cls
 echo Getting [32mlatest[36m Roblox version from internet..
-for /f "tokens=*" %%v in ('powershell -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
+for /f "tokens=*" %%v in ('powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://clientsettingscdn.roblox.com/v2/client-version/windowsplayer/channel/live' -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty clientVersionUpload"') do set "v=%%v"
 echo - [34mlatest version: [43m[97m%v%[36m[40m
 timeout 1 >nul
 cls
@@ -25,11 +27,11 @@ powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms;
 powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object System.Windows.Forms.Form; $form.StartPosition = 'CenterScreen'; $form.ControlBox = $false; $form.FormBorderStyle = 'FixedDialog'; $form.Text = 'Choose Your FPS type.'; $form.Width = 200; $form.Height = 90; $button1 = New-Object System.Windows.Forms.Button; $button1.Text = 'VSync'; $button1.Width = 50; $button1.Height = 30; $button1.Location = New-Object System.Drawing.Point(20, 10); $button1.Add_Click({ $global:result = 'VSync'; $form.Close() }); $button2 = New-Object System.Windows.Forms.Button; $button2.Text = 'Unlocked'; $button2.Width = 60; $button2.Height = 30; $button2.Location = New-Object System.Drawing.Point(105, 10); $button2.Add_Click({ $global:result = '1000'; $form.Close() }); $form.Controls.Add($button1); $form.Controls.Add($button2); $form.Add_Shown({ $form.Activate() }); [void]$form.ShowDialog(); Write-Output $result" > %D%\fps.txt && set /p FPS=<%D%\fps.txt
 echo.
 echo ---              [32mDownloading [36mClientSettings              ---
-powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
-powershell -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
+powershell -NoProfile -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
+powershell -NoProfile -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
 if %FPS%==1000 (set DispHZ=%FPS%)
-powershell -Command "(Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
-if %RES%==720p (powershell -Command "(Get-Content %D%\%c%) -replace 'YouGotEmPixels','922' | Set-Content %D%\%c%")
+powershell -NoProfile -Command "(Get-Content %D%\%c%) -replace 'PCOUNT2','%NUM2%' | Set-Content %D%\%c%; Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
+if %RES%==720p (powershell -NoProfile -Command "(Get-Content %D%\%c%) -replace 'PxCount','922' | Set-Content %D%\%c%")
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && goto bs
@@ -85,7 +87,7 @@ timeout 2 >nul
 exit
 
 :AR
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Roblox is installed in "Program Files" folder!		Please run script as administrator to continue!', 'RoEnhancer - Quality Of Life Roblox Script', '5', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %D%\Prompt.txt
+powershell -NoProfile -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Roblox is installed in "Program Files" folder!		Please run script as administrator to continue!', 'RoEnhancer - Quality Of Life Roblox Script', '5', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %D%\Prompt.txt
 set /p p=<%D%\Prompt.txt
 if %p%==Cancel goto exitapp
 net session >nul 2>&1
@@ -94,13 +96,13 @@ if %errorLevel% == 0 (
 ) else (
     if not "%1"=="runAsAdmin" (
         echo Relaunching script with administrative privileges...
-        powershell -Command "Start-Process '%~0' -ArgumentList 'runAsAdmin' -Verb RunAs"
+        powershell -NoProfile -Command "Start-Process '%~0' -ArgumentList 'runAsAdmin' -Verb RunAs"
         exit /b
     )
 )
 
 :NF
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Outdated Roblox version has been found!       Please reopen Roblox client and download the update!', 'RoEnhancer - Quality Of Life Roblox Script', '0', [System.Windows.Forms.MessageBoxIcon]::Error);}" >nul
+powershell -NoProfile -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Outdated Roblox version has been found!       Please reopen Roblox client and download the update!', 'RoEnhancer - Quality Of Life Roblox Script', '0', [System.Windows.Forms.MessageBoxIcon]::Error);}" >nul
 goto exitapp
 
 :updrem
