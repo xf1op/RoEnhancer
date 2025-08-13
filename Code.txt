@@ -30,8 +30,9 @@ echo ---              [32mDownloading [36mClientSettings              ---
 powershell -NoProfile -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/F.json -OutFile %D%\%c%"
 powershell -NoProfile -command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/xf1op/CAS/main/XC.zip -OutFile %D%\XC.zip"
 if %FPS%==1000 (set DispHZ=%FPS%)
-powershell -NoProfile -Command "(Get-Content %D%\%c%) -replace 'PCOUNT2','%NUM2%' | Set-Content %D%\%c%; Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
+powershell -NoProfile -Command "(Get-Content %D%\%c%) -replace 'PCOUNT2','%NUM2%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'PCOUNT','%NUM%' | Set-Content %D%\%c%; (Get-Content %D%\%c%) -replace 'HZ','%DispHZ%' | Set-Content %D%\%c%"
 if %RES%==720p (powershell -NoProfile -Command "(Get-Content %D%\%c%) -replace 'PxCount','922' | Set-Content %D%\%c%")
+pause
 echo.
 echo ---           [34mSearching[36m If [31mRoblox[36m Is Installed           ---
 if exist %localappdata%\bloxstrap cd /d %localappdata%\bloxstrap && goto bs
