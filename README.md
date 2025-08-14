@@ -6,7 +6,7 @@ RoEnhancer - Script for Roblox client to replace "ClientAppSettings" in roblox a
 - The script downloads custom "clientappsettings.json" file which is moved into **Roblox client** or **Bloxstrap\Modifications** folder that changes various settings inside roblox application.
 ## What does client settings json do?
 - Client settings file customizes user experience by ex. forcing light technology to increase game performance, lowering object and texture quality to utilize graphics card usage. I am trying to maintain this file, make it the most performant and add more stuff BUT **i will never apply exploitable fflags because i do not tolerate exploiters**.
-- 
+  
 ## Clickable buttons in script:
 ### Do you want to continue?
 - Yes / No
